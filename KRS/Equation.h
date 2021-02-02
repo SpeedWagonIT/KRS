@@ -25,4 +25,5 @@ public:
 
 	//преобразования элемента string (const char) в int
 	int str_to_int(char x);
+	int calc_var();
 };

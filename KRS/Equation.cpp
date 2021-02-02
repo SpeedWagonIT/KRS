@@ -50,27 +50,74 @@ void Equation::write(ofstream& x, string name_file, string s) {
 	int* a = new int[100];
 	int* b = new int[100];
 	int* c = new int[100];
-	bool flag = false;
+	int* buff = new int[100];
+	bool _in_str = false;//out of the line
+	bool _zero_a = true;//no coeff "a"
+	bool _degree = false;//found the degree
 	int cnt = 0;
 	int j = 0;
+	int k = 0;
 	for (int i = 0; i < (int)size(s); i++) {
-		if(flag == true)
-		if ((s[i]) == '2' && s[i - 1] == '^')
-			if (str_to_int(s[i - 3]) > 0 && str_to_int(s[i - 3]) <= 9)
-			{
-			a[0] = str_to_int(s[i - 3]);
+		//if (i == 2 )
+		//	_in_str = true;
+		if (s[i] == '^') {
+			_degree = true;
+			continue;
+		}
+		if (s[i] == '-')
+		{
+			buff[k] = -1;
+			k++;
+			continue;
+		}
+		if (s[i] == '+') {
+			buff[k] = 1;
+			k++;
+			continue;
+		}
+		if (!(str_to_int(s[i]) >= 0 && str_to_int(s[i]) <= 9))
+			continue;
+		else
+		{
+			buff[k] = str_to_int(s[i]);
+			k++;
+		}
+		//if (_in_str)
+		if (str_to_int(s[i]) == 2 && _degree) {
+			if (k == 1 && buff[0] == 2)
+				a[j] = 1;
 
+			if (k == 1 && buff[0] == 2){
+
+				for (int z = 1; k > 0; k--) {
+					a[j] += buff[k] * z;
+					z *= 10;
+				}
+		}
+				j++;
 			}
-			else {
-				a[0] = 0;
-				break;
+
+	}
+	/*for (int i = 0; i < (int)size(s); i++) {
+		if (!(str_to_int(a[i]) >= 0 && str_to_int(a[i]) <= 9) && !('^') && !('x') &&! ('+') && (!'-') &&!('='))
+			continue;
+		if(_in_str == true)
+			if ((s[i]) == '2' && s[i - 1] == '^') {
+				if (str_to_int(s[i - 3]) > 0 && str_to_int(s[i - 3]) <= 9)
+					a[0] = str_to_int(s[i - 3]);
+				if (s[i - 3] == '-')
+					a[0] = -1;
+			_zero_a = false;
 			}
 		j++;
 		cnt++;
 		if (cnt == 3)
-			flag = true;
-	}
-	cout << a[0]<<"x^2";
+			_in_str = true;
+		if (_zero_a == true)
+			a[0] = 1;
+	}*/
+	cout << a[0]/*<<"x^2"*/;
+	delete[]    buff;
 	delete[]	a;
 	delete[]	b;
 	delete[]	c;
@@ -92,3 +139,4 @@ int Equation::str_to_int(char x) {
 	int i = (x - '0');
 	return i;
 }
+
