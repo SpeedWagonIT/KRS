@@ -11,13 +11,14 @@ int main() {
 	ifstream fin;
 	ofstream fnew;
 	string name,str,tmp;
-	char menu;
-
-		cin >> str;
+	char menu,menu1;
 
 
-	ee.write(fnew, name, str);
-
+		do {
+			cin >> str;
+			ee.write(fnew, name, str);
+		} while (str != "STOP");
+		cout << "\nÓÑ¸!" << endl;
 	//do {
 	//	system("cls");
 	//	cout << "Âûבונטעו הויסעגטו:" << endl;
@@ -49,8 +50,6 @@ int main() {
 	//}
 	//	
 	//} while (menu !='3');
-
-
 
 	return 0;
 }
