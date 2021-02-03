@@ -18,7 +18,6 @@ public:
 	void open_File(ofstream& x, string name_file);//создать и открыть файл
 	void close_File(ifstream& x);//закрыть существующий файл
 	void close_File(ofstream& x);//закрыть новый файл
-	void delete_Separetor(string s);//удаление лишних разделителей
 
 	//сортировка уравнения от большего коэфициента к меньшему (a, b, c)
 	void sort_Equation(int a, int b, int c);

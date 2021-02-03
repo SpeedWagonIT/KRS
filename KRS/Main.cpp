@@ -15,9 +15,11 @@ int main() {
 
 
 		do {
-			cin >> str;
+			getline(cin, str);
+			if (str == "STOP")
+				break;
 			ee.write(fnew, name, str);
-		} while (str != "STOP");
+		} while (true);
 		cout << "\nÓÑ¸!" << endl;
 	//do {
 	//	system("cls");
