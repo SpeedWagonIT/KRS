@@ -23,7 +23,7 @@ void Equation::open_File(ifstream& x) {
 }
 
 void Equation::open_File(ofstream& x, string name_file) {
-	x.open(name_file);
+	x.open(name_file,ios::app);
 
 	
 }
@@ -149,10 +149,54 @@ void Equation::write(ofstream& x, string name_file, string s) {
 
 	}
 
-	cout <<"a = " << abc[0] << endl;
-	cout <<"b = " << abc[1] << endl;
-	cout <<"c = " << abc[2] << endl;
+	float a = (float)abc[0];
+	float b = (float)abc[1];
+	float c = (float)abc[2];
+	float x1, x2;
+
 	delete[]	abc;
+
+	float D;
+
+	if (a == -1)
+		x << " - ";
+	if (a < 0)
+		x << a;
+	if (a > 1)
+		x << a;
+	x << "x^2";
+	if (b == -1)
+		x << "-";
+	if (b == 1)
+		x<<"+";
+	if (b < 0)
+		x << b;
+	if (b > 1)
+		x << "+"<<b;
+	x << "x";
+	if (c > 0)
+		x << "+" << c;
+	if (c < 0)
+		x << c;
+	x << "=0" << endl;
+	D = pow(b, 2) - 4 * a * c;
+	
+	x << "D=(" << b << ")^2" << "-4*" << a << "*" << c << "="  << D << endl; 
+	if (D < 0)
+		x << "Корней нет!\n" << endl;
+	if (D == 0) {
+		x << "Есть один корень" << endl;
+		x1 = ((-1) * b) / (2 * a);
+		x << "x=" << "((-1)*" << b << ")/(2*" << a << ")=" << x1 << "\n" << endl;
+		}
+	if (D > 0){
+		x << "Корни есть" << endl;
+		x1 = ((-1) * b + sqrt(D)) / (2 * a);
+		x2 = ((-1) * b - sqrt(D)) / (2 * a);
+		x << "x1=" << "((-1)*" << b << "+(D)^1/2)/(2*" << a << ")=" << x1 << endl;
+		x << "x2=" << "((-1)*" << b << "-(D)^1/2)/(2*" << a << ")=" << x2 << "\n" << endl;
+		}
+
 	delete[]	buff;
 	close_File(x);
 }
