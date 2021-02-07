@@ -9,9 +9,9 @@ int main() {
 	setlocale(LC_ALL, "Rus");
 	Equation ee;
 	ifstream fin;
-	ofstream fnew;
+	ofstream fnew,fin_write;
 	string name,str;
-	char menu,menu1;
+	char menu;
 	
 
 	do {
@@ -23,18 +23,24 @@ int main() {
 		cin >> menu;
 		switch (menu) {
 		case '1':
-
-			break;
-		case '2':
-			cout << "¬ведите название нового файла:" << endl;
+			cout << "¬ведите название файла или его полный путь (без .txt)" << endl;
 			cin >> name;
 			name += ".txt";
-			cout << "¬ведите уравнени€ вида : ax^2+bx+c=0 и нажмите 'Enter'" << endl;
-			cout << "ƒл€ остановки напишите : STOP" << endl;
-			while (true) {
+			ee.write(fin,fin_write,name);
+			system("Pause");
+			break;
+		case '2':
+			cout << "¬ведите название нового файла (без .txt)" << endl;
+			cin >> name;
+			name += ".txt";
+			cout << "¬ведите уравнени€ вида  'ax^2+bx+c=0' и нажмите 'Enter'" << endl;
+			cout << "ƒл€ остановки ввода введите  STOP" << endl;
+			for(int i = 0;;i++) {
 				getline(cin, str);
 				if (str == "STOP")
 					break;
+				if(i == 0)
+				continue;
 				ee.write(fnew, name, str);
 			}
 			system("Pause");
@@ -46,6 +52,15 @@ int main() {
 	}
 		
 	} while (menu !='3');
+
+	cin >> name;
+	name += ".txt";
+
+	fin_write.open(name, ios::out | ios::trunc);
+	fin_write << "YES";
+	fin.close();
+
+
 
 	return 0;
 }
