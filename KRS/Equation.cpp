@@ -64,21 +64,24 @@ void Equation::write(ofstream& x, string name_file, string s) {
 	abc[0] = 0;
 	abc[1] = 0;
 	abc[2] = 0;
+		for (int i = 0; i < (int)size(s); i++) {
+			if (s[i] == '=' && str_to_int(s[i + 1]) == 0)
+				_equally = true;
+			if (s[i] == 'x' && s[i + 1] == '^' && str_to_int(s[i + 2]) == 2)
+				curr = 1;
+			if (_equally == true && curr == 1)
+				break;
+			try {
+				if (i == ((int)size(s) - 1) && (curr < 1 || _equally == false)) {
+					throw 1;
+				}
+			}
+			catch (int err) {
+				cout << "Ошибка № "<<err<<" - Неправильно введено уравнение" << endl;
+			}
 
-	for (int i = 0; i < (int)size(s); i++) {
-
-		if (s[i] == '=' && str_to_int(s[i+1]) == 0)
-			_equally = true;
-		if (s[i] == 'x' && s[i + 1] == '^' && str_to_int(s[i + 2]) == 2)
-			curr = 1;
-		if (_equally == true && curr == 1)
-			break;
-		if(i == ((int)size(s)-1) && (curr < 1 || _equally == false)){
-			cout << "Квадратное уравнение не найдено, введите квадратное уравнение:" << endl;
-			return;
 		}
-	}
-
+	
 	curr = 0;
 
 	for (int i = 0; i < (int)size(s); i++) {
@@ -217,9 +220,15 @@ void Equation::write(ofstream& x, string name_file, string s) {
 }
 
 void Equation::write(ifstream& x, ofstream& y, string name_file) {
-	if (!(open_File(x, name_file))) 
-		cout << "Файл не найден!" << endl;
-	else {
+	try {
+		if (!(open_File(x, name_file)))
+			throw 2;
+	}
+	catch (int _err) {
+		cout << "Ошибка № " << _err << " - файл не найден." << endl;
+		return;
+	}
+	
 		string tmp;
 		int cnt = 0;
 		cout << "Good!" << endl;
@@ -238,7 +247,7 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 		close_File(x);
 		y.open(name_file, ios::out | ios::trunc);
 
-		for (int _string = 0; _string < _cnt_str; _string++) {
+		for (int _string = 0; _string < _cnt_str-1; _string++) {
 
 			int* abc = new int[3];
 			int* buff = new int[100];
@@ -264,7 +273,6 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 			abc[2] = 0;
 
 			for (int i = 0; i < (int)size(tmp); i++) {
-
 				if (tmp[i] == '=' && str_to_int(tmp[i + 1]) == 0)
 					_equally = true;
 				if (tmp[i] == 'x' && tmp[i + 1] == '^' && str_to_int(tmp[i + 2]) == 2)
@@ -377,29 +385,6 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 				for (int m = 0; m < (int)size(tmp); m++)
 					y << tmp[m];
 				y << endl;
-
-				if (a == -1)
-					y << " - ";
-				if (a < 0)
-					y << a;
-				if (a > 1)
-					y << a;
-				y << "x^2";
-				if (b == -1)
-					y << "-";
-				if (b == 1)
-					y << "+";
-				if (b < 0)
-					y << b;
-				if (b > 1)
-					y << "+" << b;
-				if (b < 0 && b > 0)
-					y << "x";
-				if (c > 0)
-					y << "+" << c;
-				if (c < 0)
-					y << c;
-				y << "=0" << endl;
 				D = pow(b, 2) - 4 * a * c;
 
 				y << "D=(" << b << ")^2" << "-4*" << a << "*" << c << "=" << D << endl;
@@ -421,14 +406,8 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 
 			}
 		}
-	}
+	
 	close_File(y);
-
-
-}
-
-
-void Equation::sort_Equation(int a, int b, int c) {
 
 
 }

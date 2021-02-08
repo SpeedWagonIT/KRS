@@ -9,7 +9,6 @@ using namespace std;
 class Equation 
 {
 public:
-	/*void Print();*/
 
 	Equation();
 	~Equation();
@@ -20,9 +19,6 @@ public:
 	void open_File(ofstream& x,string name_file);//создать и открыть файл
 	void close_File(ifstream& x);
 	void close_File(ofstream& x);
-
-	//сортировка уравнения от большего коэфициента к меньшему (a, b, c)
-	void sort_Equation(int a, int b, int c);
 
 	//преобразования элемента string (const char) в int
 	int str_to_int(char x);
