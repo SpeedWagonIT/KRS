@@ -2,22 +2,17 @@
 
 Equation::Equation()
 {
-
 }
 
 
 Equation::~Equation() 
 {
-
-
 }
 
 int Equation::open_File(ifstream& x, string name_file) {
 	x.open(name_file);
 	if (!x.is_open())
-	{
 		return 0;
-	}
 	else
 		return 1;
 	
@@ -25,7 +20,7 @@ int Equation::open_File(ifstream& x, string name_file) {
 }
 
 void Equation::open_File(ofstream& x, string name_file) {
-	x.open(name_file,ios::app);
+	x.open(name_file, std::ios::app);
 
 }
 
@@ -37,20 +32,15 @@ void Equation::close_File(ofstream& x) {
 	x.close();
 }
 
-void Equation::string_read() {
-
-}
-
-
 void Equation::write(ofstream& x, string name_file, string s) {
 	open_File(x, name_file);
 	int* abc = new int[3];
 	int* buff = new int[100];
 	bool _in_str = false;//out of the line
 	bool _zero_a = true;//no coeff "a"
-	bool _equally = false;
-	int curr = 0;
-	bool _minus = false;
+	bool _equally = false;//flag that this equation
+	int curr = 0;//flag that this equation
+	bool _minus = false;//flag there is a minus
 	int cnt = 0;
 	int j = 0;
 	int k = 0;
@@ -77,7 +67,7 @@ void Equation::write(ofstream& x, string name_file, string s) {
 				}
 			}
 			catch (int err) {
-				cout << "Ошибка № "<<err<<" - Неправильно введено уравнение" << endl;
+				cout << "Ошибка № "<<err<<" - Неправильно введено уравнение" << endl; //Error № 1 - the equation was entered incorrectly
 			}
 
 		}
@@ -202,14 +192,14 @@ void Equation::write(ofstream& x, string name_file, string s) {
 
 	x << "D=(" << b << ")^2" << "-4*" << a << "*" << c << "=" << D << endl;
 	if (D < 0)
-		x << "Корней нет!\n" << endl;
+		x << "Корней нет!\n" << endl;//no roots
 	if (D == 0) {
-		x << "Есть один корень" << endl;
+		x << "Есть один корень" << endl; //there is 1 root
 		x1 = ((-1) * b) / (2 * a);
 		x << "x=" << "((-1)*" << b << ")/(2*" << a << ")=" << x1 << "\n" << endl;
 	}
 	if (D > 0) {
-		x << "Корни есть" << endl;
+		x << "Корни есть" << endl;//Roots exist
 		x1 = ((-1) * b + sqrt(D)) / (2 * a);
 		x2 = ((-1) * b - sqrt(D)) / (2 * a);
 		x << "x1=" << "((-1)*" << b << "+(D)^1/2)/(2*" << a << ")=" << x1 << endl;
@@ -225,13 +215,13 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 			throw 2;
 	}
 	catch (int _err) {
-		cout << "Ошибка № " << _err << " - файл не найден." << endl;
+		cout << "Ошибка № " << _err << " - файл не найден." << endl;//Error № 2 - file not found
 		return;
 	}
 	
 		string tmp;
 		int cnt = 0;
-		cout << "Good!" << endl;
+		cout << "Файл открыт успешно!" << endl;//The file is opened successfully
 		while(!x.eof()){
 			cnt++;
 			getline(x, tmp);
@@ -245,12 +235,13 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 			getline(x, temp_s[_cnt_str]);
 		}
 		close_File(x);
-		y.open(name_file, ios::out | ios::trunc);
+		y.open(name_file, std::ios::out | std::ios::trunc);
+		
 
-		for (int _string = 0; _string < _cnt_str-1; _string++) {
+		for (int _string = 0; _string < _cnt_str; _string++) {
 
-			int* abc = new int[3];
-			int* buff = new int[100];
+			int* abc = new int[3];//mass of coeff
+			int* buff = new int[100];//data buffer 
 			bool _in_str = false;//out of the line
 			bool _zero_a = true;//no coeff "a"
 			bool _equally = false;
@@ -260,9 +251,6 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 			int cnt = 0;
 			int j = 0;
 			int k = 0;
-
-			int _space = 0;
-			int _tabs = 0;
 
 			tmp = temp_s[_string];
 
@@ -285,6 +273,7 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 					y << tmp[m];
 					y << endl;
 					_correct_str = false;
+
 
 				}
 			}
@@ -382,6 +371,10 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 
 				delete[]	abc;
 				tmp = temp_s[_string];
+
+				if (a == 0 && b == 0 && c == 0)
+					continue;
+
 				for (int m = 0; m < (int)size(tmp); m++)
 					y << tmp[m];
 				y << endl;
@@ -389,26 +382,26 @@ void Equation::write(ifstream& x, ofstream& y, string name_file) {
 
 				y << "D=(" << b << ")^2" << "-4*" << a << "*" << c << "=" << D << endl;
 				if (D < 0)
-					y << "Корней нет!\n" << endl;
+					y << "Корней нет!"<< endl;//no roots
 				if (D == 0) {
-					y << "Есть один корень" << endl;
+					y << "Есть один корень" << endl;//there is 1 root
 					x1 = ((-1) * b) / (2 * a);
 					y << "x=" << "((-1)*" << b << ")/(2*" << a << ")=" << x1 << "\n" << endl;
 				}
 				if (D > 0) {
-					y << "Корни есть" << endl;
+					y << "Корни есть" << endl;//Roots exist
 					x1 = ((-1) * b + sqrt(D)) / (2 * a);
 					x2 = ((-1) * b - sqrt(D)) / (2 * a);
 					y << "x1=" << "((-1)*" << b << "+(D)^1/2)/(2*" << a << ")=" << x1 << endl;
-					y << "x2=" << "((-1)*" << b << "-(D)^1/2)/(2*" << a << ")=" << x2 << "\n" << endl;
+					y << "x2=" << "((-1)*" << b << "-(D)^1/2)/(2*" << a << ")=" << x2 << endl;
 				}
 				delete[]	buff;
 
 			}
 		}
-	
+		cout << "Запись произведена успешно!" << endl;//the record is successful
 	close_File(y);
-
+	
 
 }
 

@@ -3,11 +3,17 @@
 #include <string>
 #include <fstream>
 #include <cmath>
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::ifstream;
+using std::ofstream;
+
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	Equation ee;
+	Equation equ;
 	ifstream fin;
 	ofstream fnew,fin_write;
 	string name,str;
@@ -16,51 +22,51 @@ int main() {
 
 	do {
 		system("cls");
-		cout << "Выберите действие:" << endl;
-		cout << "[1] Чтение из файла" << endl;
-		cout << "[2] Ручной ввод уравнений" << endl;
-		cout << "[3]Выход.\n>> ";
+		cout << "Выберите действие:" << endl;//select an action
+		cout << "[1] Чтение из файла" << endl;//Reading from a file
+		cout << "[2] Ручной ввод уравнений" << endl;//Manual input of equations
+		cout << "[3]Выход.\n>> ";//Exit
 		cin >> menu;
-		switch (menu) {
-		case '1':
-			cout << "Введите название файла или его полный путь (без .txt)" << endl;
-			cin >> name;
-			name += ".txt";
-			ee.write(fin,fin_write,name);
-			system("Pause");
-			break;
-		case '2':
-			cout << "Введите название нового файла (без .txt)" << endl;
-			cin >> name;
-			name += ".txt";
-			cout << "Введите уравнения вида  'ax^2+bx+c=0' и нажмите 'Enter'" << endl;
-			cout << "Для остановки ввода введите  STOP" << endl;
-			for(int i = 0;;i++) {
-				getline(cin, str);
-				if (str == "STOP")
-					break;
-				if(i == 0)
-				continue;
-				ee.write(fnew, name, str);
+		try {
+			switch (menu) {
+			case '1':
+				cout << "Введите название файла или его полный путь (без .txt)" << endl;//
+				cin >> name;
+				name += ".txt";
+				equ.write(fin, fin_write, name);
+				system("Pause");
+				break;
+			case '2':
+				cout << "Введите название нового файла (без .txt)" << endl;//Enter the name of the new file (without .txt)
+				cin >> name;
+				name += ".txt";
+				cout << "Введите уравнения вида  'ax^2+bx+c=0' и нажмите 'Enter'" << endl;//Enter equations like 'ax^2+bx+c=0 'and press' Enter
+				cout << "Для остановки ввода введите  STOP" << endl;//To stop typing, type STOP
+				for (int i = 0;; i++) {
+					getline(cin, str);
+					if (str == "STOP")
+						break;
+					if (i == 0)
+						continue;
+					equ.write(fnew, name, str);
+				}
+				system("Pause");
+				break;
+
+			case '3':
+				break;
+			default:
+				throw 3;
+				break;
+
 			}
+		}
+		catch (int _err) {
+			cout << "Ошибка № " << _err << " - неккоректный ввод при выборе действия." << endl;//Error 3 - incorrect input when selecting an action.
 			system("Pause");
-			break;
-
-		case '3':
-			break;
-
-	}
+		}
 		
 	} while (menu !='3');
-
-	cin >> name;
-	name += ".txt";
-
-	fin_write.open(name, ios::out | ios::trunc);
-	fin_write << "YES";
-	fin.close();
-
-
-
+	system("Pause");
 	return 0;
 }

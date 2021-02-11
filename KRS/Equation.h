@@ -4,22 +4,26 @@
 #include <fstream>
 #include <cmath>
 #include <cstdio>
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+using std::ifstream;
+using std::ofstream;
 
-class Equation 
+class Equation
 {
 public:
 
 	Equation();
 	~Equation();
-	void string_read();
-	void write(ifstream& x, ofstream& y, string name_file);//запись решения в заготовленный файл
-	void write(ofstream& x, string name_file, string s);//создание файла и запись решения
-	int open_File(ifstream& x,string name);//открыть существующий файл
-	void open_File(ofstream& x,string name_file);//создать и открыть файл
+	void write(ifstream& x, ofstream& y, string name_file);//writing the solution to the prepared file
+	void write(ofstream& x, string name_file, string s);//creating a file and writing a solution
+	int open_File(ifstream& x, string name);//open an existing file
+	void open_File(ofstream& x, string name_file);//create and open a file
 	void close_File(ifstream& x);
 	void close_File(ofstream& x);
 
-	//преобразования элемента string (const char) в int
+	//converting an element string (const char) to int
 	int str_to_int(char x);
 };
