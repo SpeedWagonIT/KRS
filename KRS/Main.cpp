@@ -22,26 +22,26 @@ int main() {
 
 	do {
 		system("cls");
-		cout << "Âûáåðèòå äåéñòâèå:" << endl;//select an action
-		cout << "[1] ×òåíèå èç ôàéëà" << endl;//Reading from a file
-		cout << "[2] Ðó÷íîé ââîä óðàâíåíèé" << endl;//Manual input of equations
-		cout << "[3]Âûõîä.\n>> ";//Exit
+		cout << "Ã‚Ã»Ã¡Ã¥Ã°Ã¨Ã²Ã¥ Ã¤Ã¥Ã©Ã±Ã²Ã¢Ã¨Ã¥:" << endl;//select an action
+		cout << "[1] Ã—Ã²Ã¥Ã­Ã¨Ã¥ Ã¨Ã§ Ã´Ã Ã©Ã«Ã " << endl;//Reading from a file
+		cout << "[2] ÃÃ³Ã·Ã­Ã®Ã© Ã¢Ã¢Ã®Ã¤ Ã³Ã°Ã Ã¢Ã­Ã¥Ã­Ã¨Ã©" << endl;//Manual input of equations
+		cout << "[3]Ã‚Ã»ÃµÃ®Ã¤.\n>> ";//Exit
 		cin >> menu;
 		try {
 			switch (menu) {
 			case '1':
-				cout << "Ââåäèòå íàçâàíèå ôàéëà èëè åãî ïîëíûé ïóòü (áåç .txt)" << endl;//
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã´Ã Ã©Ã«Ã  Ã¨Ã«Ã¨ Ã¥Ã£Ã® Ã¯Ã®Ã«Ã­Ã»Ã© Ã¯Ã³Ã²Ã¼ (Ã¡Ã¥Ã§ .txt)" << endl;///Enter the name of the file (without .txt)
 				cin >> name;
 				name += ".txt";
 				equ.write(fin, fin_write, name);
 				system("Pause");
 				break;
 			case '2':
-				cout << "Ââåäèòå íàçâàíèå íîâîãî ôàéëà (áåç .txt)" << endl;//Enter the name of the new file (without .txt)
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã­Ã®Ã¢Ã®Ã£Ã® Ã´Ã Ã©Ã«Ã  (Ã¡Ã¥Ã§ .txt)" << endl;//Enter the name of the new file (without .txt)
 				cin >> name;
 				name += ".txt";
-				cout << "Ââåäèòå óðàâíåíèÿ âèäà  'ax^2+bx+c=0' è íàæìèòå 'Enter'" << endl;//Enter equations like 'ax^2+bx+c=0 'and press' Enter
-				cout << "Äëÿ îñòàíîâêè ââîäà ââåäèòå  STOP" << endl;//To stop typing, type STOP
+				cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã³Ã°Ã Ã¢Ã­Ã¥Ã­Ã¨Ã¿ Ã¢Ã¨Ã¤Ã   'ax^2+bx+c=0' Ã¨ Ã­Ã Ã¦Ã¬Ã¨Ã²Ã¥ 'Enter'" << endl;//Enter equations like 'ax^2+bx+c=0 'and press' Enter
+				cout << "Ã„Ã«Ã¿ Ã®Ã±Ã²Ã Ã­Ã®Ã¢ÃªÃ¨ Ã¢Ã¢Ã®Ã¤Ã  Ã¢Ã¢Ã¥Ã¤Ã¨Ã²Ã¥  STOP" << endl;//To stop typing, type STOP
 				for (int i = 0;; i++) {
 					getline(cin, str);
 					if (str == "STOP")
@@ -62,7 +62,7 @@ int main() {
 			}
 		}
 		catch (int _err) {
-			cout << "Îøèáêà ¹ " << _err << " - íåêêîðåêòíûé ââîä ïðè âûáîðå äåéñòâèÿ." << endl;//Error 3 - incorrect input when selecting an action.
+			cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Â¹ " << _err << " - Ã­Ã¥ÃªÃªÃ®Ã°Ã¥ÃªÃ²Ã­Ã»Ã© Ã¢Ã¢Ã®Ã¤ Ã¯Ã°Ã¨ Ã¢Ã»Ã¡Ã®Ã°Ã¥ Ã¤Ã¥Ã©Ã±Ã²Ã¢Ã¨Ã¿." << endl;//Error 3 - incorrect input when selecting an action.
 			system("Pause");
 		}
 		
